@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
+
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Carbon::setLocale('id'); // Mengatur Carbon ke Bahasa Indonesia
+
     }
 }

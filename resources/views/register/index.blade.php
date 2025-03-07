@@ -82,6 +82,17 @@
                                 <input type="password" class="form-control" name="password"  id="floatingPassword" placeholder="Password" value="{{ @old('password') }}">
                                 <label for="floatingPassword">Password</label>
                             </div>
+                            @error('role')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="form-floating mb-3">
+                                <select class="form-select" name="role" id="role">
+                                    <option value="" disabled selected>Pilih Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="pemilik">Pemilik</option>
+                                </select>
+                                <label for="role">Role</label>
+                            </div>
                         <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
                         <p class="text-center mb-0">Already have an Account? <a href="{{ route('login') }}">Sign In</a></p>
                     </form>

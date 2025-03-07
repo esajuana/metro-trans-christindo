@@ -31,22 +31,28 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role' => 'required|in:admin,pemilik'
         ], [
-            'name.required' => 'Nama Tidak Boleh kosong!',
+            'name.required' => 'Nama tidak boleh kosong!',
             'email.required' => 'Email tidak boleh kosong!',
-            'email.email' => 'Format email tidak benar',
-            'password.required' => 'Password tidak boleh kosong!'
+            'email.email' => 'Format email tidak benar!',
+            'email.unique' => 'Email sudah digunakan!',
+            'password.required' => 'Password tidak boleh kosong!',
+            'password.min' => 'Password minimal 6 karakter!',
+            'role.required' => 'Role harus dipilih!',
+            'role.in' => 'Role yang dipilih tidak valid!',
         ]);
-
+    
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'admin'
+            'role' => $request->role, // Menyimpan role yang dipilih
         ]);
-        session()->flash('success', 'Berhasil didaftarkan');
+    
+        session()->flash('success', 'Akun berhasil didaftarkan!');
         return redirect()->route('register');
     }
 

@@ -13,7 +13,8 @@ class HomeController extends Controller
     {
         $data['mobil'] = Mobil::count();
         $data['user'] = User::count();
-        // $data['transaksi'] = Transaksi::where('status', 'SELESAI')->sum('total');
+        $data['transaksi'] = Transaksi::where('status_transaksi', 'SELESAI')->sum('total_pembayaran');
+        
         return view('home', $data);
     }
 }
