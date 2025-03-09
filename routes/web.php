@@ -21,15 +21,17 @@ Route::get('login/keluar', [LoginController::class, 'keluar'])->name('login.kelu
 
 // ✅ ROUTE UNTUK ADMIN (Bisa Akses: Home, Mobil, User, dan Transaksi)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::resource('users', UserController::class);
     Route::resource('mobils', MobilController::class);
     Route::resource('transaksi', TransaksiController::class);
     Route::post('/transaksi/hitung-total', [TransaksiController::class, 'hitungTotal']);
     Route::post('/transaksi/{id}/hitung-denda', [TransaksiController::class, 'hitungDenda'])->name('transaksi.hitung-denda');
+    Route::get('/transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
 });
 
 // ✅ ROUTE UNTUK PEMILIK (Bisa Akses: Home dan Laporan Transaksi)
 Route::middleware(['auth', 'role:pemilik'])->group(function () {
+    Route::resource('users', UserController::class);
     Route::get('/laporan/transaksi', [LaporanController::class, 'index'])->name('laporan.transaksi');
     Route::get('/laporan-transaksi/pdf', [LaporanController::class, 'downloadPDF'])->name('laporan.transaksi.pdf');
+    Route::get('/laporan/{transaksi}', [LaporanController::class, 'show'])->name('laporan.show');
 });

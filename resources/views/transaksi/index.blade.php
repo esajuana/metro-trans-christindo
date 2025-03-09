@@ -69,6 +69,7 @@
                                     </td>
                                     <td>{{ $transaksi->status_transaksi }}</td>
                                     <td>
+                                        <a href="{{ route('transaksi.show', $transaksi->id) }}" class="btn btn-info d-block w-100 mb-2">Detail</a>
                                         <a href="{{ route('transaksi.edit', $transaksi->id) }}" class="btn btn-warning d-block w-100 mb-2 text-light">Edit</a>
                                         <button type="button" class="btn btn-danger d-block w-100 mb-2" onclick="confirmDelete('{{ route('transaksi.destroy', $transaksi->id) }}')">Hapus</button>
                                     </td>

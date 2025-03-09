@@ -22,6 +22,9 @@
                     </option>
                 @endforeach
             </select>
+            @error('kategori_sewa')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Pilih Mobil -->
@@ -39,6 +42,9 @@
                     </option>
                 @endforeach
             </select>
+            @error('mobil_id')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
 
@@ -46,70 +52,109 @@
         <div class="mb-3">
             <label class="form-label">Nama Penyewa</label>
             <input type="text" name="nama" class="form-control" value="{{ $transaksi->nama }}" required>
+            @error('nama')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Nomor Ponsel -->
         <div class="mb-3">
             <label class="form-label">Nomor Ponsel</label>
             <input type="text" name="ponsel" class="form-control" value="{{ $transaksi->ponsel }}" required>
+            @error('ponsel')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nama Instagram</label>
             <input type="text" name="instagram" class="form-control" value="{{ $transaksi->instagram }}">
+            @error('instagram')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nama Facebook</label>
             <input type="text" name="facebook" class="form-control" value="{{ $transaksi->facebook }}">
+            @error('facebook')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Alamat Tempat Tinggal</label>
             <textarea name="alamat" class="form-control" required>{{ $transaksi->alamat }}</textarea>
+            @error('alamat')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         
         <div class="mb-3">
             <label class="form-label">Alamat Pengiriman</label>
             <textarea name="alamat_pengiriman" class="form-control">{{ $transaksi->alamat_pengiriman }}</textarea>
+            @error('alamat_pengiriman')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nama Kantor</label>
             <input type="text" name="nama_kantor" class="form-control" value="{{ $transaksi->nama_kantor }}">
+            @error('nama_kantor')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Alamat Kantor</label>
             <textarea name="alamat_kantor" class="form-control" required>{{ $transaksi->alamat_kantor }}</textarea>
+            @error('alamat_kantor')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nomor Telepon Kantor</label>
             <input type="text" name="nomor_telp_kantor" class="form-control" value="{{ $transaksi->nomor_telp_kantor }}">
+            @error('nomor_telp_kantor')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Tujuan Sewa</label>
             <input type="text" name="tujuan_sewa" class="form-control" value="{{ $transaksi->tujuan_sewa }}" required>
+            @error('tujuan_sewa')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nomor Lain Yang Bisa Dihubungi</label>
             <input type="text" name="nomor_lain" class="form-control" value="{{ $transaksi->nomor_lain }}" required>
+            @error('nomor_lain')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Waktu Mulai -->
         <div class="mb-3">
             <label class="form-label">Waktu Mulai</label>
             <input type="datetime-local" name="waktu_mulai" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($transaksi->waktu_mulai)) }}" required>
+            @error('waktu_mulai')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Waktu Selesai -->
         <div class="mb-3">
             <label class="form-label">Waktu Selesai</label>
             <input type="datetime-local" name="waktu_selesai" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($transaksi->waktu_selesai)) }}" required>
+            @error('waktu_selesai')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Waktu Pengembalian -->
@@ -117,6 +162,9 @@
             <label class="form-label">Waktu Pengembalian</label>
             <input type="datetime-local" name="waktu_pengembalian" class="form-control" id="waktu_pengembalian"
             value="{{ $transaksi->waktu_pengembalian ? \Carbon\Carbon::parse($transaksi->waktu_pengembalian)->format('Y-m-d\TH:i') : '' }}">
+            @error('waktu_pengembalian')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
         
         <div class="mb-3">
@@ -126,6 +174,9 @@
                 <option value="CASH" {{ $transaksi->metode_pembayaran === 'CASH' ? 'selected' : '' }}>Cash</option>
                 <option value="E_WALLET" {{ $transaksi->metode_pembayaran === 'E_WALLET' ? 'selected' : '' }}>E Wallet</option>
             </select>
+            @error('metode_pembayaran')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -141,7 +192,10 @@
         <div class="mb-3">
             <label class="form-label">DP</label>
             <input type="text" name="dp" class="form-control" 
-              value="{{ number_format($transaksi->dp, 0, ',', '.') }}" required>
+            value="{{ number_format($transaksi->dp, 0, ',', '.') }}" required>
+            @error('dp')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -155,6 +209,9 @@
                 <option value="BELUM_LUNAS" {{ $transaksi->status_pembayaran === 'BELUM_LUNAS' ? 'selected' : '' }}>Belum Lunas</option>
                 <option value="LUNAS" {{ $transaksi->status_pembayaran === 'LUNAS' ? 'selected' : '' }}>Lunas</option>
             </select>
+            @error('status_pembayaran')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Status Transaksi -->

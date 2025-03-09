@@ -56,14 +56,31 @@ class TransaksiController extends Controller
             'status_pembayaran' => 'required|in:BELUM_LUNAS,LUNAS',
         ]);
 
+            $mobilBentrok = Transaksi::where('mobil_id', $request->mobil_id)
+            ->where('status_transaksi', '!=', 'DIBATALKAN')
+            ->where(function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->whereBetween('waktu_mulai', [$request->waktu_mulai, $request->waktu_selesai])
+                    ->orWhereBetween('waktu_selesai', [$request->waktu_mulai, $request->waktu_selesai]);
+                })
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('waktu_mulai', '<=', $request->waktu_mulai)
+                    ->where('waktu_selesai', '>=', $request->waktu_selesai);
+                });
+            })
+            ->first(); // Ambil transaksi pertama yang menyebabkan bentrok
+        
+        if ($mobilBentrok) {
+            return redirect()->back()
+                ->withErrors(['mobil_id' => "Mobil ini sudah disewa dari {$mobilBentrok->waktu_mulai} hingga {$mobilBentrok->waktu_selesai}."])
+                ->withInput();
+        }
+    
+
         // Hitung total pembayaran
         $total_pembayaran = $this->hitungTotal($request)->getData()->total_pembayaran;
-
         // Hitung DP (minimal 50% dari total pembayaran)
         $dp = min(max($request->dp, $total_pembayaran * 0.5), $total_pembayaran);
-
-
-
         // Hitung sisa pembayaran
         $sisa_pembayaran = $total_pembayaran - $dp;
 
@@ -153,9 +170,34 @@ class TransaksiController extends Controller
             // 'waktu_selesai' => 'required|date|after:waktu_mulai',
             // 'metode_pembayaran' => 'required|in:TRANSFER_BANK,CASH,E_WALLET',
             // 'status_pembayaran' => 'required|in:BELUM_LUNAS,LUNAS',
+            'waktu_mulai' => 'required|date',
+            'waktu_selesai' => 'required|date|after:waktu_mulai',
             'status_transaksi' => 'required|in:PENDING,DIPROSES,SELESAI,DIBATALKAN',
-            'waktu_pengembalian' => 'nullable|date|after:waktu_selesai',
+            'waktu_pengembalian' => 'nullable|date|after_or_equal:waktu_selesai',
         ]);
+
+             // Cek apakah ada bentrokan dengan transaksi lain (selain transaksi ini sendiri)
+            $mobilBentrok = Transaksi::where('mobil_id', $request->mobil_id)
+            ->where('status_transaksi', '!=', 'DIBATALKAN')
+            ->where('id', '!=', $transaksi->id) // Hindari pengecekan terhadap transaksi ini sendiri
+            ->where(function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->whereBetween('waktu_mulai', [$request->waktu_mulai, $request->waktu_selesai])
+                    ->orWhereBetween('waktu_selesai', [$request->waktu_mulai, $request->waktu_selesai]);
+                })
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('waktu_mulai', '<=', $request->waktu_mulai)
+                    ->where('waktu_selesai', '>=', $request->waktu_selesai);
+                });
+            })
+            ->first(); // Ambil transaksi pertama yang menyebabkan bentrok
+
+        if ($mobilBentrok) {
+            return redirect()->back()
+                ->withErrors(['mobil_id' => "Mobil ini sudah disewa dari {$mobilBentrok->waktu_mulai} hingga {$mobilBentrok->waktu_selesai}."])
+                ->withInput();
+        }
+
 
         $request->merge([
             'dp' => str_replace('.', '', $request->dp)
@@ -163,11 +205,11 @@ class TransaksiController extends Controller
         // Menghitung total pembayaran terbaru
         $denda_lama = $transaksi->denda;
 
-// Ambil nilai denda baru dari JSON response
-$denda_baru = $this->hitungDenda($request, $transaksi->id)->getData()->denda;
+        // Ambil nilai denda baru dari JSON response
+        $denda_baru = $this->hitungDenda($request, $transaksi->id)->getData()->denda;
 
-// Hitung total pembayaran baru dengan mengurangi denda lama terlebih dahulu
-$total_pembayaran_baru = ($transaksi->total_pembayaran - $denda_lama) + $denda_baru;
+        // Hitung total pembayaran baru dengan mengurangi denda lama terlebih dahulu
+        $total_pembayaran_baru = ($transaksi->total_pembayaran - $denda_lama) + $denda_baru;
 
         // $sisa_pembayaran = $transaksi->total_pembayaran - $request->dp;
 
@@ -191,8 +233,8 @@ $total_pembayaran_baru = ($transaksi->total_pembayaran - $denda_lama) + $denda_b
             'waktu_selesai' => $request->waktu_selesai,
             'status_pembayaran' => $request->status_pembayaran,
             'total_pembayaran' => $total_pembayaran_baru,
-    'denda' => $denda_baru, // Simpan denda baru
-    'sisa_pembayaran' => $total_pembayaran_baru - $request->dp,
+            'denda' => $denda_baru, // Simpan denda baru
+            'sisa_pembayaran' => $total_pembayaran_baru - $request->dp,
             // 'total_pembayaran' => $total_pembayaran_baru,
             'dp' => $request->dp,
             // 'sisa_pembayaran' => $sisa_pembayaran,
@@ -208,33 +250,34 @@ $total_pembayaran_baru = ($transaksi->total_pembayaran - $denda_lama) + $denda_b
     }
 
     public function hitungDenda(Request $request, $id)
-{
-    $transaksi = Transaksi::findOrFail($id);
-    $waktuSelesai = Carbon::parse($transaksi->waktu_selesai);
-    $waktuPengembalian = Carbon::parse($request->waktu_pengembalian);
-    $hargaSewa = $transaksi->mobil->harga;
+    {
+        $transaksi = Transaksi::findOrFail($id);
+        $waktuSelesai = Carbon::parse($transaksi->waktu_selesai);
+        $waktuPengembalian = Carbon::parse($request->waktu_pengembalian);
+        $hargaSewa = $transaksi->mobil->harga;
 
-    // Hitung keterlambatan dalam jam
-    $jamTerlambat = $waktuSelesai->diffInHours($waktuPengembalian, false);
+        // Hitung keterlambatan dalam jam
+        $jamTerlambat = $waktuSelesai->diffInHours($waktuPengembalian, false);
 
-    if ($jamTerlambat > 0) {
-        if ($jamTerlambat > 10) {
-            $denda = $hargaSewa; // Denda 1 hari penuh jika >10 jam
+        if ($jamTerlambat > 0) {
+            if ($jamTerlambat > 10) {
+                $denda = $hargaSewa; // Denda 1 hari penuh jika >10 jam
+            } else {
+                $denda = $hargaSewa * 0.1; // Denda 10% jika ≤ 10 jam
+            }
         } else {
-            $denda = $hargaSewa * 0.1; // Denda 10% jika ≤ 10 jam
+            $denda = 0;
         }
-    } else {
-        $denda = 0;
+
+        return response()->json(['denda' => $denda]);
     }
 
-    return response()->json(['denda' => $denda]);
-}
+    public function show(Transaksi $transaksi)
+    {
+        $transaksi = Transaksi::with('mobil')->find($transaksi->id);
 
-
-
-    
-    
-
+        return view('transaksi.show', compact('transaksi'));
+    }      
 
     public function destroy(Transaksi $transaksi)
     {

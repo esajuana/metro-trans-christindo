@@ -29,7 +29,7 @@ class LaporanController extends Controller
     } else {
         // Jika tidak ada filter, tampilkan semua transaksi selesai
         $transaksis = Transaksi::where('status_transaksi', 'SELESAI')
-            ->orderBy('waktu_mulai', 'desc')
+            ->orderBy('waktu_mulai', 'asc')
             ->get();
     }
 
@@ -54,6 +54,13 @@ class LaporanController extends Controller
 
         return $pdf->stream("Laporan_Transaksi_{$tanggalMulai->format('d-m-Y')}_sampai_{$tanggalSelesai->format('d-m-Y')}.pdf");
     }
+
+    public function show(Transaksi $transaksi)
+    {
+        $transaksi = Transaksi::with('mobil')->find($transaksi->id);
+
+        return view('laporan.show', compact('transaksi'));
+    }   
 
 
 }

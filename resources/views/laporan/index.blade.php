@@ -51,6 +51,7 @@
                                     <th>Sisa Pembayaran</th>
                                     <th>Denda</th>
                                     <th>Status</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,6 +74,9 @@
                                         @endif
                                     </td>
                                     <td>{{ $transaksi->status_transaksi }}</td>
+                                    <td>
+                                        <a href="{{ route('laporan.show', $transaksi->id) }}" class="btn btn-info d-block w-100 mb-2">Detail</a>
+                                    </td>
                                 </tr>
                                 @empty
                                     <tr>

@@ -25,6 +25,9 @@
                 <a href="{{ route('laporan.transaksi') }}" class="nav-item nav-link {{ Request::routeIs('laporan.*') ? 'nav-link active' : '' }}">
                     <i class="fas fa-file-alt me-2"></i>Laporan Transaksi
                 </a>  
+                <a href="{{ route('users.index') }}" class="nav-item nav-link {{ Request::routeIs('users.*') ? 'nav-link active ' : '' }}">
+                    <i class="fas fa-users me-2"></i>User
+                </a>
             @endif
 
             <!-- Menu untuk Admin -->
@@ -34,9 +37,6 @@
                 </a>
                 <a href="{{ route('mobils.index') }}" class="nav-item nav-link {{ Request::routeIs('mobils.*') ? 'nav-link active ' : '' }}">
                     <i class="fas fa-car me-2"></i>Mobil
-                </a>
-                <a href="{{ route('users.index') }}" class="nav-item nav-link {{ Request::routeIs('users.*') ? 'nav-link active ' : '' }}">
-                    <i class="fas fa-users me-2"></i>User
                 </a>
             @endif
         </div>

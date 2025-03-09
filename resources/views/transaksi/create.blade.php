@@ -13,9 +13,15 @@
             <select name="kategori_sewa" id="kategori_sewa" class="form-control" required>
                 <option value="" selected disabled>-- Pilih Kategori --</option>
                 @foreach($mobils->unique('kategori') as $mobil)
-                    <option value="{{ $mobil->kategori }}">{{ $mobil->kategori == 'DENGAN_KUNCI' ? 'Dengan Kunci (24 Jam)' : 'Tanpa Kunci (12 Jam)' }}</option>
+                    <option value="{{ $mobil->kategori }}"
+                        {{ old('kategori_sewa') == $mobil->kategori ? 'selected' : '' }}>
+                        {{ $mobil->kategori == 'DENGAN_KUNCI' ? 'Dengan Kunci (24 Jam)' : 'Tanpa Kunci (12 Jam)' }}
+                    </option>
                 @endforeach
             </select>
+            @error('kategori_sewa')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Pilih Mobil -->
@@ -25,6 +31,7 @@
                 <option value="mobil_id">-- Pilih Mobil --</option>
                 @foreach($mobils as $mobil)
                 <option value="{{ $mobil->id }}" 
+                        {{ old('mobil_id') == $mobil->id ? 'selected' : '' }} 
                         data-harga="{{ $mobil->harga }}" 
                         data-kategori="{{ $mobil->kategori }}">
                         {{ $mobil->merk }} - 
@@ -33,86 +40,134 @@
                 </option>
                 @endforeach
             </select>
+            @error('mobil_id')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Input Lainnya -->
         <div class="mb-3">
             <label class="form-label">Nama Penyewa</label>
-            <input type="text" name="nama" class="form-control" required>
+            <input type="text" name="nama" class="form-control" value="{{ old('nama') }}" required>
+            @error('nama')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nomor Ponsel</label>
-            <input type="text" name="ponsel" class="form-control" required>
+            <input type="text" name="ponsel" class="form-control" value="{{ old('ponsel') }}" required>
+            @error('ponsel')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nama Instagram</label>
-            <input type="text" name="instagram" class="form-control">
+            <input type="text" name="instagram" class="form-control" value="{{ old('instagram') }}">
+            @error('instagram')
+                 <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nama Facebook</label>
-            <input type="text" name="facebook" class="form-control">
+            <input type="text" name="facebook" class="form-control" value="{{ old('facebook') }}">
+            @error('facebook')
+                 <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Alamat Tempat Tinggal</label>
-            <textarea name="alamat" class="form-control" required></textarea>
+            <textarea name="alamat" class="form-control" required>{{ old('alamat') }}</textarea>
+            @error('alamat')
+                 <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Alamat Pengiriman</label>
-            <textarea name="alamat_pengiriman" class="form-control"></textarea>
+            <textarea name="alamat_pengiriman" class="form-control">{{ old('alamat_pengiriman') }}</textarea>
+            @error('alamat_pengiriman')
+                 <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nama Kantor</label>
-            <input type="text" name="nama_kantor" class="form-control">
+            <input type="text" name="nama_kantor" class="form-control" value="{{ old('nama_kantor') }}">
+            @error('nama_kantor')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Alamat Kantor</label>
-            <textarea name="alamat_kantor" class="form-control"></textarea>
+            <textarea name="alamat_kantor" class="form-control">{{ old('alamat_kantor') }}</textarea>
+            @error('alamat_kantor')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nomor Telepon Kantor</label>
-            <input type="text" name="nomor_telp_kantor" class="form-control">
+            <input type="text" name="nomor_telp_kantor" class="form-control" value="{{ old('nomor_telp_kantor') }}">
+            @error('nomor_telp_kantor')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Tujuan Sewa</label>
-            <input type="text" name="tujuan_sewa" class="form-control" required>
+            <input type="text" name="tujuan_sewa" class="form-control" value="{{ old('tujuan_sewa') }}" required>
+            @error('tujuan_sewa')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Nomor Lain Yang Bisa Dihubungi</label>
-            <input type="text" name="nomor_lain" class="form-control" required>
+            <input type="text" name="nomor_lain" class="form-control" value="{{ old('nomor_lain') }}" required>
+            @error('nomor_lain')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Waktu Mulai</label>
-            <input type="datetime-local" name="waktu_mulai" id="waktu_mulai" class="form-control" required>
+            <input type="datetime-local" name="waktu_mulai" id="waktu_mulai" class="form-control" value="{{ old('waktu_mulai') }}" required>
+            @error('waktu_mulai')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Waktu Selesai</label>
-            <input type="datetime-local" name="waktu_selesai" id="waktu_selesai" class="form-control" required>
+            <input type="datetime-local" name="waktu_selesai" id="waktu_selesai" class="form-control" value="{{ old('waktu_selesai') }}" required>
+            @error('waktu_selesai')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">Metode Pembayaran</label>
             <select name="metode_pembayaran" class="form-control" required>
-                <option value="TRANSFER_BANK">Transfer Bank</option>
-                <option value="CASH">Cash</option>
-                <option value="E_WALLET">E-Wallet</option>
+                <option value="TRANSFER_BANK" {{ old('metode_pembayaran') == 'TRANSFER_BANK' ? 'selected' : '' }}>Transfer Bank</option>
+                <option value="CASH" {{ old('metode_pembayaran') == 'CASH' ? 'selected' : '' }}>Cash</option>
+                <option value="E_WALLET" {{ old('metode_pembayaran') == 'E_WALLET' ? 'selected' : '' }}>E-Wallet</option>
             </select>
+            @error('metode_pembayaran')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">DP</label>
-            <input type="number" name="dp" id="dp" class="form-control" step="0.01" required>
+            <input type="number" name="dp" id="dp" class="form-control" step="0.01" value="{{ old('dp') }}" required>
+            @error('dp')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -124,9 +179,12 @@
         <div class="mb-3">
             <label class="form-label">Status Pembayaran</label>
             <select name="status_pembayaran" class="form-control" required>
-                <option value="BELUM_LUNAS">Belum Lunas</option>
-                <option value="LUNAS">Lunas</option>
+                <option value="BELUM_LUNAS" {{ old('status_pembayaran') == 'BELUM_LUNAS' ? 'selected' : '' }}>Belum Lunas</option>
+                <option value="LUNAS" {{ old('status_pembayaran') == 'LUNAS' ? 'selected' : '' }}>Lunas</option>
             </select>
+            @error('status_pembayaran')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
