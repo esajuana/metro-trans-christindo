@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login.index');
+        return view('admin.login.index');
     }
 
     public function proses(Request $request)
@@ -25,7 +25,7 @@ class LoginController extends Controller
         if(Auth::attempt($credential)){
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect()->route('admin.home');
         }
         return back()->withErrors([
             'email' => 'Autentikasi Gagal',
@@ -37,6 +37,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home');
+        return redirect()->route('admin.home');
     }
 }

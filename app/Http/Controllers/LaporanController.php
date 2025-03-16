@@ -33,7 +33,7 @@ class LaporanController extends Controller
             ->get();
     }
 
-    return view('laporan.index', compact('transaksis', 'tanggalMulai', 'tanggalSelesai'));
+    return view('admin.laporan.index', compact('transaksis', 'tanggalMulai', 'tanggalSelesai'));
 }
 
 
@@ -50,7 +50,7 @@ class LaporanController extends Controller
             ->orderBy('waktu_mulai', 'asc')
             ->get();
 
-        $pdf = Pdf::loadView('laporan.pdf', compact('transaksis', 'tanggalMulai', 'tanggalSelesai'));
+        $pdf = Pdf::loadView('admin.laporan.pdf', compact('transaksis', 'tanggalMulai', 'tanggalSelesai'));
 
         return $pdf->stream("Laporan_Transaksi_{$tanggalMulai->format('d-m-Y')}_sampai_{$tanggalSelesai->format('d-m-Y')}.pdf");
     }
@@ -59,7 +59,7 @@ class LaporanController extends Controller
     {
         $transaksi = Transaksi::with('mobil')->find($transaksi->id);
 
-        return view('laporan.show', compact('transaksi'));
+        return view('admin.laporan.show', compact('transaksi'));
     }   
 
 

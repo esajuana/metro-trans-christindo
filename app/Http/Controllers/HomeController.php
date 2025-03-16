@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mobil;
-use App\Models\Transaksi;
-use App\Models\User;
+use App\Models\Ulasan;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $data['mobil'] = Mobil::count();
-        $data['user'] = User::count();
-        $data['transaksi'] = Transaksi::where('status_transaksi', 'SELESAI')->sum('total_pembayaran');
-        
-        return view('home', $data);
+        $mobils = Mobil::all();
+        $reviews = Ulasan::where('status', 'publish')->latest()->get();
+        return view('user.home', compact('mobils', 'reviews'));
     }
+
 }

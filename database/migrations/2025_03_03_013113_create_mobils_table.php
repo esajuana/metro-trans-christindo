@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('nopolisi')->nullable();
             $table->string('merk')->nullable();
-            $table->enum('kategori', ['DENGAN_KUNCI', 'TANPA_KUNCI'])->nullable();
+            $table->enum('kategori', ['SELF_DRIVE', 'INCLUDE_DRIVER'])->nullable();
             $table->integer('kapasitas')->nullable();
             $table->integer('harga')->nullable();
             $table->text('foto')->nullable();

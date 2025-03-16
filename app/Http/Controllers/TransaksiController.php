@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use App\Models\Mobil;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,26 +13,31 @@ class TransaksiController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Transaksi::query();
+        $query = Transaksi::query()->with('mobil');
 
-        // Filter berdasarkan status transaksi jika dipilih
+        // Filter berdasarkan status transaksi (default 'PENDING' jika tidak dipilih)
         $status = $request->has('status') ? $request->status : 'PENDING';
-
         if ($status != '') {
             $query->where('status_transaksi', $status);
         }
 
-        $transaksis = $query->with('mobil')->orderBy('id', 'desc')->get();
+        // Filter berdasarkan rentang tanggal jika dipilih
+        if ($request->filled('tanggal_mulai') && $request->filled('tanggal_selesai')) {
+            $query->whereBetween('waktu_mulai', [
+                Carbon::parse($request->tanggal_mulai)->startOfDay(),
+                Carbon::parse($request->tanggal_selesai)->endOfDay(),
+            ]);
+        }
 
+        $transaksis = $query->orderBy('id', 'desc')->get();
 
-        return view('transaksi.index', compact('transaksis'));
+        return view('admin.transaksi.index', compact('transaksis'));
     }
-
 
     public function create()
     {
         $mobils = Mobil::all();
-        return view('transaksi.create', compact('mobils'));
+        return view('admin.transaksi.create', compact('mobils'));
     }
 
     public function store(Request $request)
@@ -131,7 +137,7 @@ class TransaksiController extends Controller
         $durasi_jam = ceil(($waktu_selesai - $waktu_mulai) / 3600);
 
         // Hitung jumlah unit berdasarkan kategori sewa
-        if ($kategori === 'DENGAN_KUNCI') {
+        if ($kategori === 'SELF_DRIVE') {
             $jumlah_unit = ceil($durasi_jam / 24); // Dihitung per 24 jam
         } else {
             $jumlah_unit = ceil($durasi_jam / 12); // Dihitung per 12 jam
@@ -148,7 +154,7 @@ class TransaksiController extends Controller
     public function edit(Transaksi $transaksi)
     {
         $mobils = Mobil::all();
-        return view('transaksi.edit', compact('transaksi', 'mobils'));
+        return view('admin.transaksi.edit', compact('transaksi', 'mobils'));
     }
 
     public function update(Request $request, Transaksi $transaksi)
@@ -276,8 +282,26 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::with('mobil')->find($transaksi->id);
 
-        return view('transaksi.show', compact('transaksi'));
+        return view('admin.transaksi.show', compact('transaksi'));
     }      
+
+    public function invoice($id)
+    {
+        $transaksi = Transaksi::with('mobil')->findOrFail($id);
+        return view('admin.transaksi.invoice', compact('transaksi'));
+    }
+
+    public function cetakInvoice($id)
+    {
+        $transaksi = Transaksi::with('mobil')->findOrFail($id);
+
+        // Generate PDF
+        $pdf = Pdf::loadView('admin.transaksi.invoice-pdf', compact('transaksi'))
+                ->setPaper('A4', 'portrait'); // Atur ukuran kertas
+
+        return $pdf->download('Invoice_' . $transaksi->id . '.pdf');
+    }
+
 
     public function destroy(Transaksi $transaksi)
     {

@@ -21,7 +21,7 @@ class MobilController extends Controller
 
         $mobils = $query->get();
 
-        return view('mobils.index', compact('mobils'));
+        return view('admin.mobils.index', compact('mobils'));
     }
 
 
@@ -30,7 +30,7 @@ class MobilController extends Controller
      */
     public function create()
     {
-        return view('mobils.create');
+        return view('admin.mobils.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class MobilController extends Controller
      */
     public function edit(Mobil $mobil)
     {
-        return view('mobils.edit', compact('mobil'));
+        return view('admin.mobils.edit', compact('mobil'));
     }
 
     /**
