@@ -30,13 +30,19 @@
                             </p>
                          </div>
                          <div class="d-flex mb-12">
-                          <p class="price mb-2">
-                              {{ number_format($data->harga, 0, ',', '.') }}
-                              {{ $data->kategori == 'INCLUDE_DRIVER' ? '/ 12 jam' : '/ hari' }}
-                          </p>
-                      </div>
-                          <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Pesan</a> <a href="{{ route('cars.show', $data->id) }}" class="btn btn-secondary py-2 ml-1">Detail</a>
-                          </p>
+                            <p class="price mb-2">
+                                {{ number_format($data->harga, 0, ',', '.') }}
+                                {{ $data->kategori == 'INCLUDE_DRIVER' ? '/ 12 jam' : '/ hari' }}
+                            </p>
+                         </div>
+                         <p class="d-flex mb-0 d-block">
+                          <a href="https://wa.me/6285695129768?text={{ urlencode('Halo, saya ingin menyewa ' . $data->merk . ' dengan harga ' . number_format($data->harga, 0, ',', '.') . ' per ' . ($data->kategori == 'INCLUDE_DRIVER' ? '12 jam' : 'hari')) }}" 
+                             target="_blank" class="btn btn-primary py-2 mr-1">
+                              Pesan
+                          </a>
+                          <a href="{{ route('cars.show', $data->id) }}" class="btn btn-secondary py-2 ml-1">Detail</a>
+                       </p>
+                      
                       </div>
                   </div>
               </div>

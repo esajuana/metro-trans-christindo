@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Halaman Home (Bisa diakses oleh semua role setelah login)
 Route::get('admin/home', [AdminHomeController::class, 'index'])->name('admin.home')->middleware('auth');
 
+
 // Autentikasi
 Route::get('register', [RegisterController::class, 'index'])->name('register');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
@@ -36,9 +37,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/transaksi/{id}/invoice', [TransaksiController::class, 'invoice'])->name('transaksi.invoice');
     Route::get('admin/transaksi/{id}/invoice/pdf', [TransaksiController::class, 'cetakInvoice'])->name('transaksi.cetakInvoice');
 
-    Route::get('admin/review', [ReviewController::class, 'adminIndex'])->name('admin.review.index');
-    Route::patch('admin/review/{id}/publish', [ReviewController::class, 'publish'])->name('admin.review.publish');
-    Route::delete('admin/review/{id}', [ReviewController::class, 'destroy'])->name('admin.review.destroy');
     Route::get('admin/contact', [ContactController::class, 'adminIndex'])->name('admin.contact.index');
     Route::delete('admin/contact/{id}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
 
@@ -48,6 +46,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // ✅ ROUTE UNTUK PEMILIK (Bisa Akses: Home dan Laporan Transaksi)
 Route::middleware(['auth', 'role:pemilik'])->group(function () {
     Route::resource('admin/users', UserController::class);
+    Route::get('admin/review', [ReviewController::class, 'adminIndex'])->name('admin.review.index');
+    Route::patch('admin/review/{id}/publish', [ReviewController::class, 'publish'])->name('admin.review.publish');
+    Route::patch('admin/review/{id}/unpublish', [ReviewController::class, 'unpublish'])->name('admin.review.unpublish');
+    Route::delete('admin/review/{id}', [ReviewController::class, 'destroy'])->name('admin.review.destroy');
+
     Route::get('admin/laporan/transaksi', [LaporanController::class, 'index'])->name('laporan.transaksi');
     Route::get('admin/laporan-transaksi/pdf', [LaporanController::class, 'downloadPDF'])->name('laporan.transaksi.pdf');
     Route::get('admin/laporan/{transaksi}', [LaporanController::class, 'show'])->name('laporan.show');

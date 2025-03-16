@@ -28,7 +28,10 @@
                 <p><strong>Kategori:</strong> {{ $car->kategori == 'INCLUDE_DRIVER' ? 'Include Driver' : 'Self Drive' }}</p>
                 <p><strong>Harga:</strong> Rp{{ number_format($car->harga, 0, ',', '.') }} {{ $car->kategori == 'INCLUDE_DRIVER' ? '/ 12 jam' : '/ hari' }}</p>
                 <p><strong>Kapasitas:</strong> {{ $car->kapasitas }} Seat</p>
-                <a href="#" class="btn btn-primary py-2">Pesan Sekarang</a>
+                <a href="https://wa.me/6285695129768?text={{ urlencode('Halo, saya ingin menyewa ' . $car->merk . ' dengan harga ' . number_format($car->harga, 0, ',', '.') . ' per ' . ($car->kategori == 'INCLUDE_DRIVER' ? '12 jam' : 'hari')) }}" 
+                    target="_blank" class="btn btn-primary py-2 mr-1">
+                     Pesan
+                 </a>
             </div>
         </div>
     </div>

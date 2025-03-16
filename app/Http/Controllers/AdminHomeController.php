@@ -17,4 +17,23 @@ class AdminHomeController extends Controller
         
         return view('admin.home', $data);
     }
+
+    // public function getKalenderData()
+    // {
+    //     $events = Transaksi::where('status_transaksi', 'DIPROSES') // Filter transaksi aktif
+    //         ->with('mobil') // Pastikan relasi mobil dimuat
+    //         ->get()
+    //         ->map(function ($transaksi) {
+    //             return [
+    //                 'title' => $transaksi->mobil ? $transaksi->mobil->merk : 'Mobil Tidak Diketahui',
+    //                 'start' => date('c', strtotime($transaksi->waktu_mulai)), // Format ISO 8601
+    //                 'end'   => date('c', strtotime($transaksi->waktu_selesai . ' +1 day')), 
+    //                 'backgroundColor' => '#007bff',
+    //                 'borderColor' => '#007bff',
+    //             ];
+    //         });
+
+    //     return response()->json($events);
+    // }
+
 }

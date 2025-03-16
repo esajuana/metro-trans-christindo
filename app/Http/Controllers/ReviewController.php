@@ -36,12 +36,20 @@ class ReviewController extends Controller
         return redirect()->route('review')->with('success', 'Ulasan Anda berhasil dikirim!');
     }
 
-        public function adminIndex()
+    public function adminIndex(Request $request)
     {
-        $reviews = Ulasan::latest()->get(); // Ambil semua ulasan terbaru
+        $query = Ulasan::query();
+
+        // Filter berdasarkan status (default: semua)
+        if ($request->has('status') && in_array($request->status, ['publish', 'pending'])) {
+            $query->where('status', $request->status);
+        }
+
+        $reviews = $query->orderBy('created_at', 'desc')->get();
 
         return view('admin.review.index', compact('reviews'));
     }
+
 
     public function publish($id)
     {
@@ -49,6 +57,14 @@ class ReviewController extends Controller
         $review->update(['status' => 'publish']); // Gunakan 'publish', bukan 'published'
     
         return redirect()->route('admin.review.index')->with('success', 'Ulasan berhasil dipublikasikan.');
+    }
+
+    public function unpublish($id)
+    {
+        $review = Ulasan::findOrFail($id);
+        $review->update(['status' => 'pending']); // Ubah status kembali ke pending
+
+        return redirect()->route('admin.review.index')->with('success', 'Ulasan berhasil dikembalikan ke pending.');
     }
     
 

@@ -14,6 +14,17 @@
 
                     <h6 class="mb-4">Data Review</h6>
                     
+                    <div class="d-flex justify-content-end mb-3">
+                        <form method="GET" action="{{ route('admin.review.index') }}" class="d-flex gap-2">
+                            <select name="status" class="form-select" onchange="this.form.submit()">
+                                <option value="" {{ request('status') == '' ? 'selected' : '' }}>Semua</option>
+                                <option value="publish" {{ request('status') == 'publish' ? 'selected' : '' }}>Dipublikasikan</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                            </select>
+                        </form>
+                    </div>
+                    
+                    
 
                     <table class="table">
                         <thead>
@@ -51,7 +62,14 @@
                                             @method('PATCH')
                                             <button type="submit" class="btn btn-success d-block w-100">Publikasikan</button>
                                         </form>
+                                    @else
+                                        <form action="{{ route('admin.review.unpublish', $review->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-warning d-block w-100">Pending</button>
+                                        </form>
                                     @endif
+
                                     <button class="mt-2 btn btn-danger d-block w-100" onclick="confirmDelete('{{ route('admin.review.destroy', $review->id) }}')">
                                         Hapus
                                     </button>

@@ -20,6 +20,7 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Email</th>
+                                <th>Pesan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
