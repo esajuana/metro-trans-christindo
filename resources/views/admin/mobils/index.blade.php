@@ -18,16 +18,27 @@
                         <button class="btn btn-primary">
                             <a class="text-light" href="{{ route('mobils.create') }}">Tambah Mobil</a>
                         </button>
-
                         <form action="{{ route('mobils.index') }}" method="GET">
-                            <div class="row">
-                                <select class="form-select" name="kategori" onchange="this.form.submit()">
-                                    <option value="">-- Semua Kategori --</option>
-                                    <option value="SELF_DRIVE" {{ request('kategori') == 'SELF_DRIVE' ? 'selected' : '' }}>SELF DRIVE</option>
-                                    <option value="INCLUDE_DRIVER" {{ request('kategori') == 'INCLUDE_DRIVER' ? 'selected' : '' }}>INCLUDE DRIVER</option>
-                                </select>
+                            <div class="row g-2">
+                                <!-- Input Pencarian -->
+                                <div class="col">
+                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama, Merk, atau No Polisi" value="{{ request('search') }}">
+                                </div>
+                                
+                                <!-- Dropdown Kategori -->
+                                <div class="col">
+                                    <select class="form-select" name="kategori">
+                                        <option value="">-- Semua Kategori --</option>
+                                        <option value="SELF_DRIVE" {{ request('kategori') == 'SELF_DRIVE' ? 'selected' : '' }}>SELF DRIVE</option>
+                                        <option value="INCLUDE_DRIVER" {{ request('kategori') == 'INCLUDE_DRIVER' ? 'selected' : '' }}>INCLUDE DRIVER</option>
+                                    </select>
+                                </div>
+                        
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
                             </div>
-                        </form>
+                        </form>                        
                     </div>
                     
 

@@ -14,6 +14,12 @@ class MobilController extends Controller
     {
         $query = Mobil::query();
 
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('merk', 'like', "%$search%")
+                  ->orWhere('nopolisi', 'like', "%$search%");
+        }
+
         // Filter berdasarkan kategori jika dipilih
         if ($request->filled('kategori')) {
             $query->where('kategori', $request->kategori);
@@ -81,7 +87,7 @@ class MobilController extends Controller
     public function update(Request $request, Mobil $mobil)
     {
         $request->validate([
-            'nopolisi' => 'required|unique:mobils,nopolisi,' . $mobil->id,
+            'nopolisi' => 'required|unique:mobil,nopolisi,' . $mobil->id,
             'merk' => 'required',
             'kategori' => 'required',
             'kapasitas' => 'required|integer',

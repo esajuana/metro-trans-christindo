@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Mobil;
 use App\Models\Transaksi;
+use App\Models\Ulasan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,9 @@ class AdminHomeController extends Controller
         $data['mobil'] = Mobil::count();
         $data['user'] = User::count();
         $data['transaksi'] = Transaksi::where('status_transaksi', 'SELESAI')->sum('total_pembayaran');
-        
+        $data['ulasan'] = Ulasan::count();
+        $data['kontak'] = Contact::count();
+
         return view('admin.home', $data);
     }
 

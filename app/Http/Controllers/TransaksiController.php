@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Models\Mobil;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,7 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'mobil_id' => 'required|exists:mobils,id',
+            'mobil_id' => 'required|exists:mobil,id',
             'nama' => 'required|string|max:255',
             'ponsel' => 'required|string|max:20',
             'instagram' => 'nullable|string|max:255',
@@ -121,7 +122,7 @@ class TransaksiController extends Controller
     public function hitungTotal(Request $request)
     {
         $request->validate([
-            'mobil_id' => 'required|exists:mobils,id',
+            'mobil_id' => 'required|exists:mobil,id',
             'waktu_mulai' => 'required|date',
             'waktu_selesai' => 'required|date|after:waktu_mulai',
         ]);
@@ -299,7 +300,9 @@ class TransaksiController extends Controller
         $pdf = Pdf::loadView('admin.transaksi.invoice-pdf', compact('transaksi'))
                 ->setPaper('A4', 'portrait'); // Atur ukuran kertas
 
-        return $pdf->download('Invoice_' . $transaksi->id . '.pdf');
+        return $pdf->download(
+             'Invoice_' . Str::slug($transaksi->nama, '_') . '_' . Carbon::now()->format('d_m_Y_H_i') . '_' . $transaksi->id . '.pdf'
+        );
     }
 
 

@@ -10,6 +10,8 @@ class Transaksi extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'transaksi';
+
     protected $fillable = [
         'user_id',
         'mobil_id',

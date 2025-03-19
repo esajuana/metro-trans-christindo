@@ -26,7 +26,7 @@
                     <i class="fas fa-users me-2"></i>User
                 </a>
                 <a href="{{ route('admin.review.index') }}" class="nav-item nav-link {{ Request::routeIs('admin.review.*') ? 'nav-link active ' : '' }}">
-                    <i class="far fa-comments ma-2"></i>Review
+                    <i class="far fa-comments ma-2"></i>Ulasan
                 </a>
             @endif
 
@@ -39,7 +39,7 @@
                     <i class="fas fa-car me-2"></i>Mobil
                 </a>
                 <a href="{{ route('admin.contact.index') }}" class="nav-item nav-link {{ Request::routeIs('admin.contact.*') ? 'nav-link active ' : '' }}">
-                    <i class="far fa-envelope ma-2"></i>Contact
+                    <i class="far fa-envelope ma-2"></i>Pesan
                 </a>
             @endif
         </div>

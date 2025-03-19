@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Mobil extends Model
 {
     use HasFactory, SoftDeletes;
+    
+    protected $table = 'mobil';
 
     protected $fillable = [
         'user_id', 'nopolisi', 'merk', 'kategori', 'kapasitas', 'harga', 'foto'

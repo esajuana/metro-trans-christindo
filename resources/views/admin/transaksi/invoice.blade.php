@@ -18,7 +18,10 @@
             <h5>Detail Mobil</h5>
             <p><strong>Mobil:</strong> {{ $transaksi->mobil->merk }}</p>
             <p><strong>Kategori:</strong> {{ $transaksi->mobil->kategori }}</p>
-            <p><strong>Harga Sewa:</strong> Rp{{ number_format($transaksi->mobil->harga, 0, ',', '.') }}/jam</p>
+            <p><strong>Harga Sewa:</strong> 
+                {{ number_format($transaksi->mobil->harga, 0, ',', '.') }}
+                {{ $transaksi->mobil->kategori == 'INCLUDE_DRIVER' ? '/ 12 jam' : '/ hari' }}
+            </p>
             <p><strong>Durasi:</strong> {{ \Carbon\Carbon::parse($transaksi->waktu_mulai)->format('d M Y H:i') }} - 
                 {{ \Carbon\Carbon::parse($transaksi->waktu_selesai)->format('d M Y H:i') }}</p>
 

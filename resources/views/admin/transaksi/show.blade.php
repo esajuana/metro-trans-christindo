@@ -42,7 +42,13 @@
                     </tr>
                     <tr>
                         <th>Waktu Pengembalian</th>
-                        <td>{{ \Carbon\Carbon::parse($transaksi->waktu_mulai  ?? 'Belum dikembalikan')->translatedFormat('l, d F Y H:i') }}</td>
+                        <td>
+                            @if ($transaksi->waktu_pengembalian)
+                                {{ \Carbon\Carbon::parse($transaksi->waktu_pengembalian)->translatedFormat('l, d F Y H:i') }}
+                            @else
+                                <span>Belum dikembalikan</span>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th>Metode Pembayaran</th>
