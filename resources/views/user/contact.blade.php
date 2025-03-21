@@ -54,19 +54,19 @@
           <form action="{{ route('contact.store') }}" method="POST" class="bg-light p-5 contact-form">
             @csrf
             <div class="form-group">
-                <input type="text" name="nama" class="form-control" placeholder="Your Name" required>
+                <input type="text" name="nama" class="form-control" placeholder="Nama" required>
             </div>
             <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
             </div>
             <div class="form-group">
-                <input type="text" name="telepon" class="form-control" placeholder="Phone Number">
+                <input type="text" name="telepon" class="form-control" placeholder="Nomer Telepon">
             </div>
             <div class="form-group">
-                <textarea name="pesan" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
+                <textarea name="pesan" cols="30" rows="7" class="form-control" placeholder="Pesan" required></textarea>
             </div>
             <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Kirim Pesan" class="btn btn-primary py-3 px-5">
             </div>
         </form>        
         </div>

@@ -15,6 +15,10 @@
 </head>
 <body>
     <div class="container">
+        <div style="text-align: center;">
+            <img src="{{ public_path('assets/admin/img/logo-metro-trans.png') }}" alt="Logo Perusahaan" width="150">
+        </div>
+
         <h2 class="text-center">Invoice Rental Mobil</h2>
         <p><strong>No. Transaksi:</strong> INV-{{ $transaksi->id }}</p>
         <p><strong>Tanggal:</strong> {{ \Carbon\Carbon::now()->format('d M Y H:i') }}</p>

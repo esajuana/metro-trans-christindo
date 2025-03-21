@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>Daftar</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -50,7 +50,7 @@
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                            
-                            <h3>Sign Up</h3>
+                            <h3>Daftar</h3>
                         </div>
                         @if (session()->has('success'))
                             <div class="alert alert-success" role="alert">
@@ -64,14 +64,14 @@
                             @enderror
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" name="name" id="floatingText" placeholder="name" value="{{ @old('name') }}">
-                                <label for="floatingText">Name</label>
+                                <label for="floatingText">Nama</label>
                             </div>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com" value="{{ @old('email') }}">
-                                <label for="floatingInput">Email address</label>
+                                <label for="floatingInput">Email</label>
                             </div>
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>
@@ -91,8 +91,8 @@
                                 </select>
                                 <label for="role">Role</label>
                             </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
-                        <p class="text-center mb-0">Already have an Account? <a href="{{ route('login') }}">Sign In</a></p>
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Daftar</button>
+                        <p class="text-center mb-0">Sudah punya akun? <a href="{{ route('login') }}">Login</a></p>
                     </form>
                     </div>
                 </div>

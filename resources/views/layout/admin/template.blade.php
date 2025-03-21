@@ -12,9 +12,6 @@
     <!-- Favicon -->
     <link href="{{ asset('assets/admin/img/favicon.ico') }}" rel="icon">
 
-    {{-- <!-- FullCalendar CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet"> --}}
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,10 +72,6 @@
     <script src="{{ asset('assets/admin/lib/tempusdominus/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/admin/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('assets/admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/locales/id.min.js"></script>
- --}}
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/admin/js/main.js') }}"></script>

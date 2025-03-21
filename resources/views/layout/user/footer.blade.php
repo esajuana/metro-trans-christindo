@@ -14,18 +14,6 @@
             </ul>
           </div>
         </div>
-        {{-- <div class="col-md">
-           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Customer Support</h2>
-            <ul class="list-unstyled">
-              <li><a href="#" class="py-2 d-block">FAQ</a></li>
-              <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-              <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-              <li><a href="#" class="py-2 d-block">How it works</a></li>
-              <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-            </ul>
-          </div>
-        </div> --}}
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Punya Pertanyaan?</h2>

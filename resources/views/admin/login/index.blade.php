@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>Login</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -50,7 +50,7 @@
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="index.html" class="">
-                                <h3 class="text-primary">Sign In</h3>
+                                <h3 class="text-primary">Login</h3>
                             </a>
                         </div>
                         <form action="{{ route('login.proses') }}" method="POST">
@@ -60,7 +60,7 @@
                             @enderror
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" name="email" value="{{ @old('email') }}" id="floatingInput" placeholder="name@example.com">
-                                <label for="floatingInput">Email address</label>
+                                <label for="floatingInput">Email</label>
                             </div>
                             @error('password')
                             <span class="text-danger">{{ $message }}</span>
@@ -69,8 +69,8 @@
                                 <input type="password" class="form-control" name="password" value="{{ @old('password') }}" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                             </div>
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                            <p class="text-center mb-0">Don't have an Account? <a href="{{ route('register') }}">Sign Up</a></p>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Login</button>
+                            <p class="text-center mb-0">Belum Punya Akun? <a href="{{ route('register') }}">Daftar</a></p>
                         </form>
                     </div>
                 </div>

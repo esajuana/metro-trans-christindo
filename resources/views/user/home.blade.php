@@ -6,10 +6,6 @@
     <div class="container">
       <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
         <div class="col-lg-8 ftco-animate">
-            {{-- <div class="text w-100 text-center mb-md-5 pb-md-5">
-              <h1 class="mb-4">Cepat &amp; Dan Mudah Untuk Sewa Mobil</h1>
-              <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
-          </div> --}}
         </div>
       </div>
     </div>
@@ -180,7 +176,7 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
                     <span class="subheading">Testimoni</span>
-                    <h2 class="mb-3">Happy Clients</h2>
+                    <h2 class="mb-3">Ulasan</h2>
                 </div>
             </div>
             <div class="row ftco-animate">
@@ -213,46 +209,4 @@
             </div>
         </div>
     </section>
-    
-
-
-  {{-- <section class="ftco-counter ftco-section img bg-light" id="section-counter">
-          <div class="overlay"></div>
-      <div class="container">
-          <div class="row">
-        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-          <div class="block-18">
-            <div class="text text-border d-flex align-items-center">
-              <strong class="number" data-number="60">0</strong>
-              <span>Year <br>Experienced</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-          <div class="block-18">
-            <div class="text text-border d-flex align-items-center">
-              <strong class="number" data-number="1090">0</strong>
-              <span>Total <br>Cars</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-          <div class="block-18">
-            <div class="text text-border d-flex align-items-center">
-              <strong class="number" data-number="2590">0</strong>
-              <span>Happy <br>Customers</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-          <div class="block-18">
-            <div class="text d-flex align-items-center">
-              <strong class="number" data-number="67">0</strong>
-              <span>Total <br>Branches</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-  </section>	 --}}
 @endsection
