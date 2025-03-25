@@ -62,6 +62,15 @@ class LaporanController extends Controller
         return view('admin.laporan.show', compact('transaksi'));
     }   
 
+    public function destroy($id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->delete();
+
+        return redirect()->route('laporan.transaksi')->with('success', 'Transaksi berhasil dihapus.');
+    }
+
+
 
 }
 

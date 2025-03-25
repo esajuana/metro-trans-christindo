@@ -35,12 +35,23 @@ class ContactController extends Controller
         return redirect()->route('contact')->with('success', 'Pesan Anda telah dikirim!');
     }
 
-    public function adminIndex()
+    public function adminIndex(Request $request)
     {
-        $contact = Contact::latest()->get(); // Ambil semua ulasan terbaru
+        $query = Contact::query();
+
+        // Filter berdasarkan pencarian
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('nama', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('pesan', 'like', "%$search%");
+        }
+
+        $contact = $query->latest()->get(); // Ambil data terbaru setelah difilter
 
         return view('admin.contact.index', compact('contact'));
     }
+
 
     public function destroy($id)
     {

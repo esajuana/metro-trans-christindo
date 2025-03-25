@@ -15,13 +15,16 @@
                     <h6 class="mb-4">Data Review</h6>
                     
                     <div class="d-flex justify-content-end mb-3">
-                        <form method="GET" action="{{ route('admin.review.index') }}" class="d-flex gap-2">
-                            <select name="status" class="form-select" onchange="this.form.submit()">
+                        <form method="GET" action="{{ route('admin.review.index') }}" class="mb-3 d-flex gap-2">
+                            <input type="text" name="search" class="form-control" placeholder="Cari ulasan..." value="{{ request('search') }}">
+                            <select name="status" class="form-select">
                                 <option value="" {{ request('status') == '' ? 'selected' : '' }}>Semua</option>
                                 <option value="publish" {{ request('status') == 'publish' ? 'selected' : '' }}>Dipublikasikan</option>
                                 <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                             </select>
-                        </form>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ route('admin.review.index') }}" class="btn btn-secondary">Reset</a>
+                        </form>                        
                     </div>
                     
                     

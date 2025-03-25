@@ -16,30 +16,30 @@
                     
                     <div class="d-flex justify-content-between mb-3">
                         <button class="btn btn-primary">
-                            <a class="text-light" href="{{ route('mobils.create') }}">Tambah Mobil</a>
+                            <a class="text-light text-decoration-none" href="{{ route('mobils.create') }}">Tambah Mobil</a>
                         </button>
-                        <form action="{{ route('mobils.index') }}" method="GET">
-                            <div class="row g-2">
+                    
+                        <div class="d-flex">
+                            <form action="{{ route('mobils.index') }}" method="GET" class="d-flex">
                                 <!-- Input Pencarian -->
-                                <div class="col">
-                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama, Merk, atau No Polisi" value="{{ request('search') }}">
-                                </div>
-                                
+                                <input type="text" class="form-control me-2" name="search" placeholder="Cari Nama, Merk, atau No Polisi" value="{{ request('search') }}">
+                    
                                 <!-- Dropdown Kategori -->
-                                <div class="col">
-                                    <select class="form-select" name="kategori">
-                                        <option value="">-- Semua Kategori --</option>
-                                        <option value="SELF_DRIVE" {{ request('kategori') == 'SELF_DRIVE' ? 'selected' : '' }}>SELF DRIVE</option>
-                                        <option value="INCLUDE_DRIVER" {{ request('kategori') == 'INCLUDE_DRIVER' ? 'selected' : '' }}>INCLUDE DRIVER</option>
-                                    </select>
-                                </div>
-                        
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary">Cari</button>
-                                </div>
-                            </div>
-                        </form>                        
+                                <select class="form-select me-2" name="kategori">
+                                    <option value="">-- Semua Kategori --</option>
+                                    <option value="SELF_DRIVE" {{ request('kategori') == 'SELF_DRIVE' ? 'selected' : '' }}>SELF DRIVE</option>
+                                    <option value="INCLUDE_DRIVER" {{ request('kategori') == 'INCLUDE_DRIVER' ? 'selected' : '' }}>INCLUDE DRIVER</option>
+                                </select>
+                    
+                                <!-- Tombol Cari -->
+                                <button type="submit" class="btn btn-primary me-2">Cari</button>
+                    
+                                <!-- Tombol Reset -->
+                                <a href="{{ route('mobils.index') }}" class="btn btn-secondary">Reset</a>
+                            </form>
+                        </div>
                     </div>
+                    
                     
 
                     <table class="table">

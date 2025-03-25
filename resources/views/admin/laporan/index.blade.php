@@ -76,6 +76,7 @@
                                     <td>{{ $transaksi->status_transaksi }}</td>
                                     <td>
                                         <a href="{{ route('laporan.show', $transaksi->id) }}" class="btn btn-info d-block w-100 mb-2">Detail</a>
+                                        <button type="button" class="btn btn-danger d-block w-100 mb-2" onclick="confirmDelete('{{ route('laporan.destroy', $transaksi->id) }}')">Hapus</button>
                                     </td>
                                 </tr>
                                 @empty
@@ -92,5 +93,36 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus data ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(deleteUrl) {
+        document.getElementById('deleteForm').action = deleteUrl;
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+</script>
 
 @endsection

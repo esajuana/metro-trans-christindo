@@ -14,6 +14,15 @@
 
                     <h6 class="mb-4">Data Pesan</h6>
 
+                    <div class="d-flex justify-content-end mb-3">
+                        <form method="GET" action="{{ route('admin.contact.index') }}" class="d-flex">
+                            <input type="text" name="search" class="form-control me-2" placeholder="Cari pesan..." value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-primary me-2">Cari</button>
+                            <a href="{{ route('admin.contact.index') }}" class="btn btn-secondary">Reset</a>
+                        </form>
+                    </div>                    
+                    
+
                     <table class="table">
                         <thead>
                             <tr>

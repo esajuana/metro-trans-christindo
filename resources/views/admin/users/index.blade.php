@@ -13,10 +13,20 @@
                     @endif
 
                     <h6 class="mb-4">Data User</h6>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <button class="btn btn-primary">
+                            <a class="text-light" href="{{ route('users.create') }}">Tambah User</a>
+                        </button>
+                        <div class="d-flex">
+                            <form method="GET" action="{{ route('users.index') }}" class="d-flex">
+                                <input type="text" name="search" class="form-control me-2" placeholder="Cari User..." value="{{ request('search') }}">
+                                <button type="submit" class="btn btn-primary me-2">Cari</button>
+                                <a href="{{ route('users.index') }}" class="btn btn-secondary">Reset</a>
+                            </form>
+                        </div>
+                    </div>        
                     
-                    <button class="btn btn-primary">
-                        <a class="text-light" href="{{ route('users.create') }}">Tambah User</a>
-                    </button>
 
                     <table class="table">
                         <thead>

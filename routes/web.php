@@ -54,6 +54,7 @@ Route::middleware(['auth', 'role:pemilik'])->group(function () {
     Route::get('admin/laporan/transaksi', [LaporanController::class, 'index'])->name('laporan.transaksi');
     Route::get('admin/laporan-transaksi/pdf', [LaporanController::class, 'downloadPDF'])->name('laporan.transaksi.pdf');
     Route::get('admin/laporan/{transaksi}', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::delete('admin/laporan/{transaksi}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

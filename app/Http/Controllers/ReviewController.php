@@ -40,15 +40,26 @@ class ReviewController extends Controller
     {
         $query = Ulasan::query();
 
-        // Filter berdasarkan status (default: semua)
-        if ($request->has('status') && in_array($request->status, ['publish', 'pending'])) {
+        // Filter berdasarkan status (publish atau pending)
+        if ($request->filled('status') && in_array($request->status, ['publish', 'pending'])) {
             $query->where('status', $request->status);
+        }
+
+        // Filter berdasarkan pencarian (nama, email, atau rating)
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('rating', $search);
+            });
         }
 
         $reviews = $query->orderBy('created_at', 'desc')->get();
 
         return view('admin.review.index', compact('reviews'));
     }
+
 
 
     public function publish($id)
