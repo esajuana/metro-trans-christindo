@@ -17,6 +17,34 @@
                         <td>{{ $transaksi->ponsel }}</td>
                     </tr>
                     <tr>
+                        <th>Instagram</th>
+                        <td>{{ $transaksi->instagram }}</td>
+                    </tr>
+                    <tr>
+                        <th>Facebook</th>
+                        <td>{{ $transaksi->facebook }}</td>
+                    </tr>
+                    <tr>
+                        <th>Alamat Tempat Tinggal</th>
+                        <td>{{ $transaksi->alamat }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nama Kantor</th>
+                        <td>{{ $transaksi->nama_kantor }}</td>
+                    </tr>
+                    <tr>
+                        <th>Alamat Kantor</th>
+                        <td>{{ $transaksi->alamat_kantor }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nomor Telepon Kantor</th>
+                        <td>{{ $transaksi->nomor_telp_kantor }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tujuan Sewa</th>
+                        <td>{{ $transaksi->tujuan_sewa }}</td>
+                    </tr>
+                    <tr>
                         <th>Mobil</th>
                         <td>{{ $transaksi->mobil->merk }}</td>
                     </tr>

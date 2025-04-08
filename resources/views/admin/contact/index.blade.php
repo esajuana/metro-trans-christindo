@@ -28,8 +28,9 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama</th>
+                                <th scope="col">Telepon</th>
                                 <th scope="col">Email</th>
-                                <th>Pesan</th>
+                                <th style="word-break: break-word; white-space: normal; max-width: 250px;">Pesan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -38,8 +39,9 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->telepon }}</td>
                                     <td>{{ $data->email }}</td>
-                                    <td>{{ $data->pesan }}</td>
+                                    <td style="word-break: break-word; white-space: normal; max-width: 250px;">{{ $data->pesan }}</td>
                                     <td>
                                         <button class="btn btn-danger d-block w-100" onclick="confirmDelete('{{ route('admin.contact.destroy', $data->id) }}')">
                                             Hapus

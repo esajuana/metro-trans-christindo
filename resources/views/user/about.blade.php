@@ -25,7 +25,7 @@
 
         <p>Metro Trans Christindo adalah perusahaan penyedia layanan rental mobil profesional di Bali yang berkomitmen untuk memberikan pengalaman perjalanan yang nyaman, aman, dan terpercaya. Kami melayani berbagai kebutuhan transportasi, baik untuk keperluan wisata, bisnis, maupun perjalanan pribadi.</p>
         <p>Dengan visi menjadi penyedia layanan transportasi terkemuka di Bali, kami selalu mengutamakan kualitas, keamanan, dan kepuasan pelanggan. Misi kami adalah menyediakan armada kendaraan yang terawat, memberikan layanan pelanggan yang ramah dan profesional, menawarkan harga sewa yang kompetitif dan transparan, serta menjamin kenyamanan dan keselamatan pelanggan dalam setiap perjalanan.</p>
-        <p><a href="#" class="btn btn-primary py-3 px-4">Cari Mobil</a></p>
+        <p><a href="{{ route('cars') }}" class="btn btn-primary py-3 px-4">Cari Mobil</a></p>
       </div>
             </div>
         </div>

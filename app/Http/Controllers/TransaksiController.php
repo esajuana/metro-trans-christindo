@@ -64,7 +64,7 @@ class TransaksiController extends Controller
         ]);
 
             $mobilBentrok = Transaksi::where('mobil_id', $request->mobil_id)
-            ->where('status_transaksi', '!=', 'DIBATALKAN')
+            ->whereNotIn('status_transaksi', ['DIBATALKAN', 'SELESAI'])
             ->where(function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
                     $q->whereBetween('waktu_mulai', [$request->waktu_mulai, $request->waktu_selesai])
@@ -185,7 +185,7 @@ class TransaksiController extends Controller
 
              // Cek apakah ada bentrokan dengan transaksi lain (selain transaksi ini sendiri)
             $mobilBentrok = Transaksi::where('mobil_id', $request->mobil_id)
-            ->where('status_transaksi', '!=', 'DIBATALKAN')
+            ->whereNotIn('status_transaksi', ['DIBATALKAN', 'SELESAI'])
             ->where('id', '!=', $transaksi->id) // Hindari pengecekan terhadap transaksi ini sendiri
             ->where(function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {

@@ -18,15 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-4">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-users fa-3x text-primary"></i>
-                <div class="ms-3">
-                    <p class="mb-2">User</p>
-                    <h6 class="mb-0">{{ $user }}</h6>
-                </div>
-            </div>
-        </div>
+       
 
         {{-- Hanya tampil untuk Admin --}}
         @if (Auth::user()->role == 'admin')
@@ -43,6 +35,15 @@
 
         {{-- Hanya tampil untuk Pemilik --}}
         @if (Auth::user()->role == 'pemilik')
+            <div class="col-sm-6 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-users fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">User</p>
+                        <h6 class="mb-0">{{ $user }}</h6>
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-6 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                     <i class="far fa-comments fa-3x text-primary"></i>

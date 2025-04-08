@@ -42,18 +42,34 @@ class LaporanController extends Controller
         $tanggalMulai = $request->input('tanggal_mulai');
         $tanggalSelesai = $request->input('tanggal_selesai');
 
-        $tanggalMulai = Carbon::parse($tanggalMulai)->startOfDay();
-        $tanggalSelesai = Carbon::parse($tanggalSelesai)->endOfDay();
+        if ($tanggalMulai && $tanggalSelesai) {
+            $tanggalMulai = Carbon::parse($tanggalMulai)->startOfDay();
+            $tanggalSelesai = Carbon::parse($tanggalSelesai)->endOfDay();
 
-        $transaksis = Transaksi::where('status_transaksi', 'SELESAI')
-            ->whereBetween('waktu_mulai', [$tanggalMulai, $tanggalSelesai])
-            ->orderBy('waktu_mulai', 'asc')
-            ->get();
+            $transaksis = Transaksi::where('status_transaksi', 'SELESAI')
+                ->whereBetween('waktu_mulai', [$tanggalMulai, $tanggalSelesai])
+                ->orderBy('waktu_mulai', 'asc')
+                ->get();
+        } else {
+            $transaksis = Transaksi::where('status_transaksi', 'SELESAI')
+                ->orderBy('waktu_mulai', 'asc')
+                ->get();
+
+            // Set variabel ke null supaya tidak error di blade
+            $tanggalMulai = null;
+            $tanggalSelesai = null;
+        }
 
         $pdf = Pdf::loadView('admin.laporan.pdf', compact('transaksis', 'tanggalMulai', 'tanggalSelesai'));
 
-        return $pdf->stream("Laporan_Transaksi_{$tanggalMulai->format('d-m-Y')}_sampai_{$tanggalSelesai->format('d-m-Y')}.pdf");
+        // Ubah nama file sesuai kondisi
+        $filename = $tanggalMulai && $tanggalSelesai
+            ? "Laporan_Transaksi_{$tanggalMulai->format('d-m-Y')}_sampai_{$tanggalSelesai->format('d-m-Y')}.pdf"
+            : "Laporan_Transaksi_Semua_Periodik.pdf";
+
+        return $pdf->stream($filename);
     }
+
 
     public function show(Transaksi $transaksi)
     {

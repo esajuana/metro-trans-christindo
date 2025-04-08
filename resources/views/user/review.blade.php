@@ -39,12 +39,12 @@
   
           <div class="mb-3">
               <label for="telepon" class="form-label">Nomor Telepon</label>
-              <input type="text" class="form-control" id="telepon" name="telepon">
+              <input type="text" class="form-control" id="telepon" name="telepon" required>
           </div>
   
           <div class="mb-3">
               <label for="pesan" class="form-label">Pesan</label>
-              <textarea class="form-control" id="pesan" name="pesan" rows="3"></textarea>
+              <textarea class="form-control" id="pesan" name="pesan" rows="3" required></textarea>
           </div>
   
           <div class="mb-3">

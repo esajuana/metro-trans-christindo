@@ -54,7 +54,9 @@
 </head>
 <body>
     <h2>Laporan Transaksi Rental Mobil</h2>
+    @if (isset($tanggalMulai) && isset($tanggalSelesai))
     <p><strong>Periode:</strong> {{ $tanggalMulai->format('d-m-Y') }} - {{ $tanggalSelesai->format('d-m-Y') }}</p>
+    @endif
      <table>
         <thead>
             <tr>

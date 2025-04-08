@@ -6,11 +6,11 @@
           <div class="ftco-footer-widget mb-4 ml-md-5">
             <h2 class="ftco-heading-2">Menu</h2>
             <ul class="list-unstyled">
-              <li><a href="#" class="py-2 d-block">Beranda</a></li>
-              <li><a href="#" class="py-2 d-block">Sewa Mobil</a></li>
-              <li><a href="#" class="py-2 d-block">Tentang Kami</a></li>
-              <li><a href="#" class="py-2 d-block">Kontak</a></li>
-              <li><a href="#" class="py-2 d-block">Ulasan</a></li>
+              <li><a href="{{ route('home') }}" class="py-2 d-block">Beranda</a></li>
+              <li><a href="{{ route('cars') }}" class="py-2 d-block">Sewa Mobil</a></li>
+              <li><a href="{{ route('about') }}" class="py-2 d-block">Tentang Kami</a></li>
+              <li><a href="{{ route('contact') }}" class="py-2 d-block">Kontak</a></li>
+              <li><a href="{{ route('review') }}" class="py-2 d-block">Ulasan</a></li>
             </ul>
           </div>
         </div>
@@ -32,9 +32,9 @@
             <h2 class="ftco-heading-2"><a href="#" class="logo">Metro Trans</span></a></h2>
             <p>Metro Trans Christindo adalah perusahaan penyedia layanan rental mobil profesional di Bali yang berkomitmen untuk memberikan pengalaman perjalanan yang nyaman, aman, dan terpercaya.</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              {{-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li> --}}
             </ul>
           </div>
         </div>

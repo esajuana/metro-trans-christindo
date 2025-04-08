@@ -23,7 +23,7 @@
                               <div class="services w-100 text-center">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                                 <div class="text w-100">
-                                  <h3 class="heading mb-2">Pilih Lokasi Penjemputan Anda</h3>
+                                  <h3 class="heading mb-2">Pilih Lokasi Pengiriman Anda</h3>
                               </div>
                               </div>      
                             </div>
@@ -88,8 +88,11 @@
                                   </div>
 
                                   <p class="d-flex mb-0 d-block">
-                                      <a href="#" class="btn btn-primary py-2 mr-1">Pesan Mobil</a> 
-                                      <a href="#" class="btn btn-secondary py-2 ml-1">Detail</a>
+                                    <a href="https://wa.me/6285695129768?text={{ urlencode('Halo, saya ingin menyewa ' . $data->merk . ' dengan harga ' . number_format($data->harga, 0, ',', '.') . ' per ' . ($data->kategori == 'INCLUDE_DRIVER' ? '12 jam' : 'hari')) }}" 
+                                      target="_blank" class="btn btn-primary py-2 mr-1">
+                                       Pesan
+                                   </a>
+                                   <a href="{{ route('cars.show', $data->id) }}" class="btn btn-secondary py-2 ml-1">Detail</a>
                                   </p>
                               </div>
                           </div>
@@ -115,7 +118,7 @@
 
               <p>Metro Trans Christindo adalah perusahaan penyedia layanan rental mobil profesional di Bali yang berkomitmen untuk memberikan pengalaman perjalanan yang nyaman, aman, dan terpercaya. Kami melayani berbagai kebutuhan transportasi, baik untuk keperluan wisata, bisnis, maupun perjalanan pribadi.</p>
               <p>Dengan visi menjadi penyedia layanan transportasi terkemuka di Bali, kami selalu mengutamakan kualitas, keamanan, dan kepuasan pelanggan. Misi kami adalah menyediakan armada kendaraan yang terawat, memberikan layanan pelanggan yang ramah dan profesional, menawarkan harga sewa yang kompetitif dan transparan, serta menjamin kenyamanan dan keselamatan pelanggan dalam setiap perjalanan.</p>
-              <p><a href="#" class="btn btn-primary py-3 px-4">Cari Mobil</a></p>
+              <p><a href="{{ route('cars') }}" class="btn btn-primary py-3 px-4">Cari Mobil</a></p>
             </div>
                   </div>
               </div>

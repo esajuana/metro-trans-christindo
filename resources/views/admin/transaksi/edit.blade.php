@@ -109,7 +109,7 @@
 
         <div class="mb-3">
             <label class="form-label">Alamat Kantor</label>
-            <textarea name="alamat_kantor" class="form-control" required>{{ $transaksi->alamat_kantor }}</textarea>
+            <textarea name="alamat_kantor" class="form-control">{{ $transaksi->alamat_kantor }}</textarea>
             @error('alamat_kantor')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
